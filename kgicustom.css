@@ -4,11 +4,11 @@ custom look and feel for KGI CONTENTdm site
 
 
 */
-
-iframe {
-	background-color: #fff;
-	height: 50vh;
-	width: 100%;
-	
+#maincontent .shared-box, iframe {
+	border: none;
+	flex: 2 1 40%;
+	padding: 5px;
+	margin: 0 0 10px 0;
+	max-width: 42em;
+	min-height: 50em;
 }
-
