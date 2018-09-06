@@ -1,0 +1,174 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!------------------------------------------------------------------------CREDITS----------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------PHOTO CREDITS-------------------------------------------------------------------------------------------------------------------------------------
+Sunset Bales - Image courtesy of Evgeni Dinev at FreeDigitalPhotos.net  	see: http://www.freedigitalphotos.net/images/sunset-bales-photo-p201166
+Landscape with Farm - Image courtesy of Marc Aert at FreeDigitalPhotos.net 	see: http://www.freedigitalphotos.net/images/agree-terms.php?id=1001664
+Road in the Mist - Image courtesy of Evgeni Dinev at FreeDigitalPhotos.net 	see: http://www.freedigitalphotos.net/images/agree-terms.php?id=10020625
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------CSS/JAVASCRIPT/WEB DESIGN CREDITS-----------------------------------------------------------------------------------------------------------------
+Layout template from Blueprints by Mary Lou - Responsive Full Width Tabs 	see: http://tympanus.net/codrops/2014/03/21/responsive-full-width-tabs/
+Classie - class helper functions by @desandro https://github.com/desandro/classie
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+<!--**********************************************************************************************************************************************************************************************************************-->		
+<!--**********************************************************************************************************************************************************************************************************************-->		
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta charset="UTF-8" />
+	
+	<title>Agriculture, Kansas Department of</title>
+
+<!--CSS/Javascript Links - DO NOT TOUCH UNLESS YOU KNOW WHAT YOU'RE DONIG -->
+		<link rel="stylesheet" type="text/css" href="../../AgencyCommon/css/main_frames.css"  />
+		<link rel="stylesheet" type="text/css" href="../../AgencyCommon/css/main_base.css" />
+		<link rel="stylesheet" type="text/css" href="../../AgencyCommon/css/component2.css" />
+		<link rel="stylesheet" type="text/css" href="../../AgencyCommon/css/CanHeader.css" /> <!--New CSS For Candace's Header-->
+		<script src="../../AgencyCommon/js/modernizr.custom.js"></script>
+		<script src="../../AgencyCommon/js/jquery-1.10-2.min.js"></script>
+
+<!--START NAV BAR-->
+<div id="framecontent" style="white-space:wrap>
+<div class="innertube">
+		<?php include_once("../../AgencyCommon/Header/header.php")?>
+<!--END NAV BAR -->
+	
+<style>
+	span#SnipCol{
+		font: 16px sans-serif;
+		color: black; 
+	}
+</style>	
+
+</head>
+<!--**********************************************************************************************************************************************************************************************************************-->		
+<!--**********************************************************************************************************************************************************************************************************************-->		
+
+<body>
+<div id="maincontent">
+<div class="innertube">	
+		<!--[if IE]>
+  		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		
+		<div class="container">
+			<header class="clearfix">
+<!--Name of Agency-->
+				<h1>Agriculture, Kansas Department of</h1>
+			</header>	
+			<div id="tabs" class="tabs">
+				<nav>
+					<ul>
+						<li><a href="#section-1" class="icon-shop"><span>Agency History and Info</span></a></li>
+						<li><a href="#section-2" class="icon-cup"><span>Search This Agency</span></a></li>
+					</ul>
+				</nav>
+				<div class="content">
+<!--Section 1-->
+				<section id="section-1">
+						
+						<div class="mediabox">
+							<img src="images/Sunset Bales - Evgeni Dinev.jpg" alt="Sunset Bales - Image courtesy of Evgeni Dinev at FreeDigitalPhotos.net" title="Image courtesy of Evgeni Dinev at FreeDigitalPhotos.net"  height="195" width="360"/>
+							<h3>Description</h3>
+							<span style="color:black;">
+								<p>
+									"[The] First record of a Kansas agricultural organization dates back to territorial days when in 1855 the 'bogus' legislature of that year organized a territorial agricultural society.  There was little record of that society's further function.<br><br>  
+									
+									A Kansas Agricultural Society was organized in 1857.  While the Society soon suspended activities because of the troubled times, it reorganized in 1862 and since that date its activities have been continuous.  The Legislature of 1872 formed from this Society the Kansas State Board of Agriculture." <br><br> 
+									
+									- Kansas State Board of Agriculture, Centennial Report: 1961 (pp 318)
+								</p>
+							</span>
+						</div>
+						
+						<div class="mediabox">
+							<img src="images/Landscape with Farm - Marc Aert.jpg" alt="Landscape with Farm - Image courtesy of Marc Aert at FreeDigitalPhotos.net" title="Image courtesy of Marc Aert at FreeDigitalPhotos.net" height="195" width="360" />
+							<h3>Agency Publications in KGI</h3>
+							<span id="SnipCol">
+								<ul id="snip"></ul>
+	<!--Load agency section from browse page-->
+								<script>
+									$( "#snip" ).load( "../../home/browse-page-stripped.php #agrdept");
+								</script>
+							</span>					
+						</div>
+						
+						<div class="mediabox">
+							<img src="images/Road in the Mist - Evgeni Dinev.jpg" alt="Road in the Mist - Image courtesy of Evgeni Dinev at FreeDigitalPhotos.net" title="Image courtesy of Evgeni Dinev at FreeDigitalPhotos.net" height="195" width="360"/>
+							<h3>Agency Website</h3>
+							<p><span style="color:black;">The agency's official web page can be found </span><a href="http://agriculture.ks.gov/">Here</a></p></p>
+						</div>
+					</section>
+<!--Section 2-->					
+					<section id="section-2">
+					
+						<div class="mediabox">
+							<h3>Simple Keyword Search</h3>
+							<p><form method="GET" action="http://cdm16884.contentdm.oclc.org/cdm/search/collection/p16884coll5/">
+								<span style="color:black;">Search Only this Agency:</ span>
+								<br>
+								<input type="text" name="searchterm" size="39">
+								<br><br><input type="submit" value="Submit" class="button">
+								</form>
+							</p>
+						</div>
+						
+						<div class="mediabox">
+							<h3>Structured Browsing</h3>
+							<p><a href="http://cdm16884.contentdm.oclc.org/cdm/search/collection/p16884coll5/order/title/ad/asc" target"_blank">Browse by Title</a></p>
+							<p><a href="http://cdm16884.contentdm.oclc.org/cdm/search/collection/p16884coll5/order/year/ad/asc" target"_blank">Browse by Date</a></p>
+							<p><a href= "http://cdm16884.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/treesearch/index.php"> Browse a List of all Agencies' Publications</a><p>
+						</div>
+						
+						<div class="mediabox">
+							<h3>Global Search</h3>
+							<p><form method="GET" action="http://cdm16884.contentdm.oclc.org/cdm/search/">
+								<span style="color:black;">Search All Agencies in KGI:</ span>
+								<br>
+								<input type="text" name="searchterm" size="39">
+								<br><br><input type="submit" value="Submit" class="button">
+								</form>
+							</p>
+						</div>
+					</section>
+					
+<!--Other sections not in use-->					
+					<section id="section-3">
+						<div class="mediabox">
+							<h3></h3>
+							<p></p>
+							<p></a></p>
+							<p></a></p>
+							<p></p>
+							<p></a></p>
+						</div>
+					</section>
+					<section id="section-4">
+						<div class="mediabox">
+							<h3></h3>
+							<p></p>
+						</div>
+					</section>
+				</div><!-- /content -->
+			</div><!-- /tabs -->
+		</div>		
+<!--**********************************************************************************************************************************************************************************************************************-->		
+		<script src="http://cdm16884.contentdm.oclc.org/ui/custom/default/collection/default/resources/custompages/AgencyCommon/js/cbpFWTabs.js"></script>
+		<script>
+			new CBPFWTabs( document.getElementById( 'tabs' ) );
+		</script>
+		
+<!-- Classie - class helper functions by @desandro https://github.com/desandro/classie -->
+</div><!--Acts to end innertube!-->
+
+</body>
+		
+	<div id="footer">
+		<?php include_once("../../AgencyCommon/Footer/footer.php")?>
+
+	</div>
+</html>
