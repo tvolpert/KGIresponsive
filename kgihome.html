@@ -1,0 +1,37 @@
+<main id="homepage-main">
+	<details class="ContentHeader-maincontainer shared-box cdm-content-header"><p tabindex="0" class="ContentHeader-mainCopyHolder"><p> <summary>A service of the State Library of Kansas</summary> Kansas Government Information (KGI) is a permanent online archive of state publications issued by Kansas state agencies, commissions and institutions.</p></p></details>
+	<section id="agencyList" class="shared-box">
+		
+	</section>
+
+</main>
+<script> //#AgencyList generate list of agencies/collections for front page
+var agencyList= document.querySelector('#agencyList');
+var list='<ul id="collection-list">';
+var agencyName;
+
+	fetch('https://cdm16884.contentdm.oclc.org/digital/api/collections?startPage=1&count=128')
+		.then(function(response) {
+		return response.json();
+	  }) //end .then
+	  .then(function(data) {
+		for (i = 0 ; i < data.cards.length; i++) { //begin loop1 to populate list
+			agencyName = data.cards[i].title;
+			list += '<li class="agencyName" id="'+data.cards[i].alias+'">'+agencyName+'</li>'
+	   } //end loop1
+		agencyList.innerHTML = list+'</ul>';
+		 
+		}) //end .then
+		.then ( function() {
+			var indAgency = document.querySelector('#collection-list').children;
+			for (i=0; i < indAgency.length; i++) { //begin loop2 to add document links
+			indAgency[i].addEventListener('click', function(e) { //load and display doc list
+				getDocs(e);
+			}) 
+			}  //end loop2
+		 }); //end .then, end fetch
+function getDocs(e) { 
+	console.log('https://cdm16884.contentdm.oclc.org/digital/api/search/collection/'+e.target.id);
+}
+//end #AgencyList
+</script>
