@@ -12,3 +12,11 @@ custom look and feel for KGI CONTENTdm site
 	max-width: 42em;
 	min-height: 50em;
 }
+/* fold/unfold list of publications */
+.agency-docs {
+	display: none;
+}
+
+.agency-docs:target {
+	display: block;
+}

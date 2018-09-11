@@ -1,67 +1,9 @@
-<style>
-
-.agency-docs {
-	display: none;
-}
-
-.agency-docs:target {
-	display: block;
-}
-
-
-</style>
-
+<!--v1.0.0-->
 <main id="homepage-main">
-	<details class="ContentHeader-maincontainer shared-box cdm-content-header"><p tabindex="0" class="ContentHeader-mainCopyHolder"><p> <summary>A service of the State Library of Kansas</summary> Kansas Government Information (KGI) is a permanent online archive of state publications issued by Kansas state agencies, commissions and institutions.</p></p></details>
+	<details class="ContentHeader-maincontainer shared-box cdm-content-header"><p tabindex="0" class="ContentHeader-mainCopyHolder"><p> A service of the State Library of Kansas, Kansas Government Information (KGI) is a permanent online archive of state publications issued by Kansas state agencies, commissions and institutions.</p></p></details>
 	<section id="agencyList" class="shared-box">
 		
 	</section>
 
 </main>
-<script> //#AgencyList generate list of agencies/collections for front page
-var agencyList= document.querySelector('#agencyList');
-var list='<ul id="collection-list">';
-var agencyName;
 
-
-	fetch('https://cdm16884.contentdm.oclc.org/digital/api/collections?startPage=1&count=999')
-		.then(function(response) {
-		return response.json();
-	  }) //end .then
-	  .then(function(data) {
-		for (i = 0 ; i < data.cards.length; i++) { //begin loop1 to populate list
-			agencyName = data.cards[i].title;
-			var theID = data.cards[i].alias;
-			list += '<li class="agencyName" ><a href="#agency-'+theID+'" id="'+theID+'">'+agencyName+'</a><ul id="agency-'+theID+'" class="agency-docs"> </ul></li>';
-	   } //end loop1
-		agencyList.innerHTML = list+'</ul>';
-		 
-		}) //end .then
-		.then ( function() {
-			var indAgency = document.querySelector('#collection-list').children;
-			for (i=0; i < indAgency.length; i++) { //begin loop2 to add document links
-			indAgency[i].addEventListener('click', function(e) { //load and display doc list
-				e.preventDefault();
-				getDocs(e);
-			}) 
-			}  //end loop2
-		 }); //end .then, end fetch
-function getDocs(e) { //load and display doc list
-	fetch('https://cdm16884.contentdm.oclc.org/digital/api/search/collection/'+e.target.id+'?startPage=1&count=999')
-	.then(function(response) {
-		return response.json();
-	  }) //end .then
-	  .then (function(data) {
-	  let theID = e.target.id;
-	  let listResults = '';
-			  for (i = 0 ; i < data.items.length; i++) { //begin loop
-		  var regex = /\/singleitem/;
-		  recURL = data.items[i].itemLink.split(regex);
-		  listResults += '<li><a href="/digital'+recURL+'">'+data.items[i].title+'</a></li>'
-	   } //end loop
-	   document.querySelector('#agency-'+theID).innerHTML = listResults;
-	   location.hash = '#agency-'+theID;
-	  }); //end .then
-}
-//end #AgencyList
-</script>
