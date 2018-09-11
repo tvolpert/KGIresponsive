@@ -20,3 +20,11 @@ custom look and feel for KGI CONTENTdm site
 .agency-docs:target {
 	display: block;
 }
+
+.agency-docs::before { /*keep top of item in view when jumping to anchor link */
+	content: "";
+	display: block;
+	margin-top:-175px;
+	padding-top:175px;
+	
+}

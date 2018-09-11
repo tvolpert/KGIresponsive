@@ -1,6 +1,9 @@
 (function() { //begin namespace
-document.addEventListener('cdm-custom-page:ready', function(e){
-	console.log('ready!');
+document.addEventListener('cdm-home-page:ready', function(e){
+	console.log('enter!');
+	let mainContent = document.querySelector('.cdm-main-content');
+	mainContent.innerHTML += '<section id="agencyList" class="shared-box"><h1>Browse Collections by Agency</h1></section><section id="askALibrarian"><iframe name="cwindow" src="https://us.libraryh3lp.com/chat/slkreference@chat.libraryh3lp.com?skin=18078&identity=Lib"></iframe></section>';
+	
 //#AgencyList generate list of agencies/collections for front page
 var agencyList= document.querySelector('#agencyList');
 
@@ -15,7 +18,7 @@ var agencyList= document.querySelector('#agencyList');
 			var theID = data.cards[i].alias;
 			listMeat += '<li class="agencyName" ><a href="#agency-'+theID+'" id="'+theID+'">'+agencyName+'</a><ul id="agency-'+theID+'" class="agency-docs"></ul></li>';
 	   } //end loop1
-		agencyList.innerHTML = listMeat+'</ul>';
+		agencyList.innerHTML += listMeat+'</ul>';
 		 
 		}) //end .then
 		.then ( function() {
