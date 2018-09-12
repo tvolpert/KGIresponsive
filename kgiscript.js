@@ -6,7 +6,10 @@ document.addEventListener('cdm-app:ready', function(e) {
 document.addEventListener('cdm-custom-page:ready', function(e){
 	//populate home page with our layout:
 
-
+	let regexp = /#agency-.+/;
+	if (location.hash.match(regexp) ) { 
+		//figure out a way to fetch and display list contents for ppl landing on a target
+	};
 			fetch('https://cdm16884.contentdm.oclc.org/digital/api/collections/all/simple')
 		.then(function(response) {
 		return response.json();
