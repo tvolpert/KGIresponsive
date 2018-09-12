@@ -17,14 +17,40 @@ custom look and feel for KGI CONTENTdm site
 	display: none;
 }
 
-.agency-docs:target {
+.agency-name:target .agency-docs {
 	display: block;
 }
 
-.agency-docs::before { /*keep top of item in view when jumping to anchor link */
-	content: "";
+.agency-name {
+		margin-top:-25px;
+	padding-top:25px;
 	display: block;
-	margin-top:-175px;
-	padding-top:175px;
-	
 }
+.agency-name::before { /*change bullets to folders */
+	content:"\f07b";
+	display:inline-block;
+	font-family: FontAwesome;
+	margin-left: -10px;
+	margin-right: 10px;
+}
+.agency-name:target::before {
+	content: "\f07c";
+}
+
+.agency-name.loading::before {
+    animation: fa-spin 2s infinite linear;
+    content: "\f110";
+}
+
+
+@media only screen and (min-width: 768px) {
+	.agency-name {
+		margin-top: -175px;
+		padding-top: 175px;
+	}
+}
+
+section {
+	padding: 10px;
+}
+
