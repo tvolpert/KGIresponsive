@@ -5,8 +5,8 @@ document.addEventListener('cdm-app:ready', function(e) {
 }); 
 document.addEventListener('cdm-home-page:ready', function(e){
 	//populate home page with our layout:
-	let mainContent = document.querySelector('.cdm-main-content');
-	mainContent.innerHTML += '<section id="agencyList" class="shared-box"><h1>Browse Collections by Agency</h1></section><section id="askALibrarian"><iframe name="cwindow" src="https://us.libraryh3lp.com/chat/slkreference@chat.libraryh3lp.com?skin=18078&identity=Lib"></iframe></section>';
+/*	let mainContent = document.querySelector('.CoreLayout-mainWrapperContainer');
+	mainContent.innerHTML += '<section id="agencyList" class="shared-box"><h1>Browse Collections by Agency</h1></section><section id="askALibrarian"><iframe name="cwindow" src="https://us.libraryh3lp.com/chat/slkreference@chat.libraryh3lp.com?skin=18078&identity=Lib"></iframe></section>'; */
 
 			fetch('https://cdm16884.contentdm.oclc.org/digital/api/collections?startPage=1&count=999')
 		.then(function(response) {
@@ -25,7 +25,7 @@ document.addEventListener('cdm-home-page:ready', function(e){
 .then(function() { //#AgencyList generate list of agencies/collections for front page
 			let agencyList= document.querySelector('#agencyList');
 	agencyList.innerHTML += listMeat+'</ul>';
-	document.querySelector('.alert.alert-info').remove(); //delete cdms busted loading box
+	
 	let indAgency = document.querySelectorAll('#collection-list li a');
 	for (i=0; i < indAgency.length; i++) { //begin loop2 to add document links
 	indAgency[i].addEventListener('click', function(event) { 
@@ -96,4 +96,4 @@ else {console.log('else!');}
 
 
 
-})(); //end namespace
+})(); //end namespace 

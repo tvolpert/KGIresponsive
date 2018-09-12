@@ -51,6 +51,11 @@ custom look and feel for KGI CONTENTdm site
 }
 
 section {
+	margin: 10px;
 	padding: 10px;
+}
+
+#agency-list {
+	order: -1;
 }
 
