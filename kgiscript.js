@@ -3,27 +3,26 @@ var listMeat;
 document.addEventListener('cdm-app:ready', function(e) {
 
 }); 
-document.addEventListener('cdm-home-page:ready', function(e){
+document.addEventListener('cdm-custom-page:ready', function(e){
 	//populate home page with our layout:
-/*	let mainContent = document.querySelector('.CoreLayout-mainWrapperContainer');
-	mainContent.innerHTML += '<section id="agencyList" class="shared-box"><h1>Browse Collections by Agency</h1></section><section id="askALibrarian"><iframe name="cwindow" src="https://us.libraryh3lp.com/chat/slkreference@chat.libraryh3lp.com?skin=18078&identity=Lib"></iframe></section>'; */
 
-			fetch('https://cdm16884.contentdm.oclc.org/digital/api/collections?startPage=1&count=999')
+
+			fetch('https://cdm16884.contentdm.oclc.org/digital/api/collections/all/simple')
 		.then(function(response) {
 		return response.json();
 	  }) //end .then
-	  .then(function(data) {
+	  .then(function(data) { 
 		listMeat='<ul id="collection-list">';
-		for (i = 0 ; i < data.cards.length; i++) { //begin loop1 to populate list
-			let agencyName = data.cards[i].title;
-			var theID = data.cards[i].alias;
+		for (i = 0 ; i < data.length; i++) { //begin loop1 to populate list
+			let agencyName = data[i].name;
+			var theID = data[i].alias;
 			listMeat += '<li class="agency-name" id="agency-'+theID+'"><a href="#agency-'+theID+'" id="'+theID+'">'+agencyName+'</a><ul class="agency-docs"></ul></li>';
 	   } //end loop1
 }) //end .then
 	
 	
 .then(function() { //#AgencyList generate list of agencies/collections for front page
-			let agencyList= document.querySelector('#agencyList');
+			let agencyList= document.querySelector('#agency-list');
 	agencyList.innerHTML += listMeat+'</ul>';
 	
 	let indAgency = document.querySelectorAll('#collection-list li a');
@@ -44,7 +43,7 @@ function getDocs(event) { //load and display doc list
 	event.preventDefault();
 	theContainer.classList.add('loading');
 	console.log('if!');
-	fetch('https://cdm16884.contentdm.oclc.org/digital/api/search/collection/'+theID+'?startPage=1&count=999')
+	fetch('https://cdm16884.contentdm.oclc.org/digital/api/search/collection/'+theID)
 	.then(function(response) { //.then1
 		return response.json();
 	  }) //end .then1

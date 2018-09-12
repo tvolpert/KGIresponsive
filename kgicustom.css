@@ -4,6 +4,22 @@ custom look and feel for KGI CONTENTdm site
 
 
 */
+
+/* variables for theming */
+
+:root {
+	--SLKGold: #F5B11E;
+	--SLKDarkBlue: #192857;
+	--SLKMedBLue: #16629F;
+	--SLKLightBlue: #258ECD;
+	--SLKLightOrange: #E06547;
+	--SLKDarkOrange: #D83726;
+	--SLKDarkGray: #404041;
+	--SLKLightGray: #F1F1F2;
+	
+}
+
+/*content */
 #maincontent .shared-box, iframe {
 	border: none;
 	flex: 2 1 40%;
@@ -12,7 +28,7 @@ custom look and feel for KGI CONTENTdm site
 	max-width: 42em;
 	min-height: 50em;
 }
-/* fold/unfold list of publications */
+/* list of publications */
 .agency-docs {
 	display: none;
 }
@@ -26,7 +42,9 @@ custom look and feel for KGI CONTENTdm site
 	padding-top:25px;
 	display: block;
 }
-.agency-name::before { /*change bullets to folders */
+.agency-name::before { 
+/*change bullets to folders */
+	color: var(--SLKGold);
 	content:"\f07b";
 	display:inline-block;
 	font-family: FontAwesome;
@@ -45,8 +63,8 @@ custom look and feel for KGI CONTENTdm site
 
 @media only screen and (min-width: 768px) {
 	.agency-name {
-		margin-top: -175px;
-		padding-top: 175px;
+		margin-top: -155px;
+		padding-top: 155px;
 	}
 }
 
