@@ -40,7 +40,7 @@ function getDocs(event) { //load and display doc list
   let theID = event.target.id;
   let theContainer = document.querySelector('#agency-'+theID);
   let theList = document.querySelector('#agency-'+theID+' .agency-docs');
-  if (theList.innerHTML == '') { console.log(theList); //#if1 check to make sure this list hasn't already been loaded
+  if (theList.innerHTML == '') { ; //#if1 check to make sure this list hasn't already been loaded
 	event.preventDefault();
 	theContainer.classList.add('loading');
 	console.log('if!');
@@ -53,7 +53,7 @@ function getDocs(event) { //load and display doc list
 	  let listResults = '';
 			  for (i = 0 ; i < data.items.length; i++) { //begin loop3
 		  var regex = /\/singleitem/;
-		  recURL = data.items[i].itemLink.split(regex);
+		  recURL = data.items[i].itemLink.split(regex)[1];
 		  listResults += '<li><a href="/digital'+recURL+'">'+data.items[i].title+'</a></li>'
 		} //end loop3
 	   theList.innerHTML = listResults;
