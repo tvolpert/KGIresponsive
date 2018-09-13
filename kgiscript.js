@@ -97,5 +97,11 @@ else {console.log('else!');}
 // } end #DocList
 
 
+	document.addEventListener('cdm-item-page:ready', function(e) {
+		// #LineBreakFix extract broken html from metadata fields, reinsert to fix formatting 
+		let metaData = document.querySelectorAll('.ItemMetadata-metadatarow td span');
+		metaData.forEach(function(item) { let text = item.textContent; item.innerHTML = text; } );
+	}); //end item-page event listener
+
 
 })(); //end namespace 

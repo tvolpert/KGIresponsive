@@ -8,6 +8,7 @@ table of contents
 #	layout tweaks
 #	custom functionality
 	## list of publications
+	## individual record pages
 
 */
 
@@ -28,7 +29,7 @@ table of contents
 }
 
 /*---------------------------------------------
-   # layout tweaks 
+   # layout tweaks
 -----------------------------------------------*/
 
 section {
@@ -66,7 +67,6 @@ section {
 	padding: 10px;
 }
 
-
 #maincontent .shared-box, iframe {
 	border: none;
 	flex: 2 1 40%;
@@ -81,7 +81,7 @@ section {
   # custom functionality
 -----------------------------------------------*/
 
-/* 	## list of agency publications
+/* 	## list of agency publications for homepage
 --------------------------------------*/
 .agency-docs {
 	display: none;
@@ -92,7 +92,7 @@ section {
 }
 
 .agency-name {
-		margin-top:-25px;
+	margin-top:-25px;
 	padding-top:25px;
 	display: block;
 }
@@ -120,4 +120,8 @@ section {
 		padding-top: 155px;
 	}
 }
-
+/*	## individual record pages
+---------------------------------------------*/
+.ItemView-itemSearchContainer.ItemSearch-itemSearchPrint {
+	display: none /*remove confusing search box */
+}
