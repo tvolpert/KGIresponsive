@@ -4,13 +4,13 @@ document.addEventListener('cdm-app:ready', function(e) {
 
 }); 
 document.addEventListener('cdm-custom-page:ready', function(e){
-	//populate home page with our layout:
-
+//figure out a way to fetch and display list contents for ppl landing on a target?
 	let regexp = /#agency-.+/;
 	if (location.hash.match(regexp) ) { 
-		//figure out a way to fetch and display list contents for ppl landing on a target
+		//do something with that information lol
 	};
-			fetch('https://cdm16884.contentdm.oclc.org/digital/api/collections/all/simple')
+//#AgencyList generate list of agencies/collections for front page	
+	fetch('https://cdm16884.contentdm.oclc.org/digital/api/collections/all/simple')
 		.then(function(response) {
 		return response.json();
 	  }) //end .then
@@ -24,49 +24,48 @@ document.addEventListener('cdm-custom-page:ready', function(e){
 }) //end .then
 	
 	
-.then(function() { //#AgencyList generate list of agencies/collections for front page
+.then(function() { 
 			let agencyList= document.querySelector('#agency-list');
 	agencyList.innerHTML += listMeat+'</ul>';
 	
 	let indAgency = document.querySelectorAll('#collection-list li a');
 	for (i=0; i < indAgency.length; i++) { //begin loop2 to add document links
 	indAgency[i].addEventListener('click', function(event) { 
-		getDocs(event);
+		var currentPage = 1;
+		getDocs(event, currentPage);
 	}) 
 	}  //end loop2
 	});
 
 
 
-function getDocs(event) { //load and display doc list
-  let theID = event.target.id;
-  let theContainer = document.querySelector('#agency-'+theID);
-  let theList = document.querySelector('#agency-'+theID+' .agency-docs');
-  if (theList.innerHTML == '') { ; //#if1 check to make sure this list hasn't already been loaded
-	event.preventDefault();
-	theContainer.classList.add('loading');
-	console.log('if!');
-	fetch('https://cdm16884.contentdm.oclc.org/digital/api/search/collection/'+theID)
-	.then(function(response) { //.then1
-		return response.json();
-	  }) //end .then1
-	  .then (function(data) { //.then2
-	
-	  let listResults = '';
-			  for (i = 0 ; i < data.items.length; i++) { //begin loop3
-		  var regex = /\/singleitem/;
-		  recURL = data.items[i].itemLink.split(regex)[1];
-		  listResults += '<li><a href="/digital'+recURL+'">'+data.items[i].title+'</a></li>'
-		} //end loop3
-	   theList.innerHTML = listResults;
-	   location.hash = '#agency-'+theID;
-	   theContainer.classList.remove('loading');
-	  }); //end .then2
-} //end #if1
-else {console.log('else!');}
-
-
-}
+	function getDocs(event, currentPage) { //##getDocs load and display doc list for each agency
+	  let theID = event.target.id;
+	  let theContainer = document.querySelector('#agency-'+theID);
+	  let theList = document.querySelector('#agency-'+theID+' .agency-docs');
+	  if (theList.innerHTML == '') { ; //#if1 check to make sure this list hasn't already been loaded
+		event.preventDefault();
+		theContainer.classList.add('loading');
+		console.log('if!');
+		fetch('https://cdm16884.contentdm.oclc.org/digital/api/search/collection/'+theID+'/page/'+currentPage)
+		.then(function(response) { //.then1
+			return response.json();
+		  }) //end .then1
+		  .then (function(data) { //.then2
+		
+		  let listResults = '';
+				  for (i = 0 ; i < data.items.length; i++) { //begin loop3
+			  var regex = /\/singleitem/;
+			  recURL = data.items[i].itemLink.split(regex)[1];
+			  listResults += '<li><a href="/digital'+recURL+'">'+data.items[i].title+'</a></li>'
+			} //end loop3
+		   theList.innerHTML = listResults;
+		   location.hash = '#agency-'+theID;
+		   theContainer.classList.remove('loading');
+		  }); //end .then2
+	} //end #if1
+	//if already loaded, contents will display via CSS when targeted
+	}; //end ##getDocs
 //end #AgencyList
 }); //end cdm-home-page:ready event
 
@@ -101,6 +100,7 @@ else {console.log('else!');}
 		// #LineBreakFix extract broken html from metadata fields, reinsert to fix formatting 
 		let metaData = document.querySelectorAll('.ItemMetadata-metadatarow td span');
 		metaData.forEach(function(item) { let text = item.textContent; item.innerHTML = text; } );
+		//end #LineBreakFix
 	}); //end item-page event listener
 
 

@@ -1,0 +1,90 @@
+<!--v1.0.0-->
+<script>
+function listOfCollections() {
+	 fetch('https://cdm16884.contentdm.oclc.org/digital/api/collections/all/simple')
+			.then(function(response) {
+			return response.json();
+		  }) //end .then
+		  .then(function(data) { 
+			listMeat='<ul id="collection-list">';
+			for (i = 0 ; i < data.length; i++) { //begin loop1 to populate list
+				let agencyName = data[i].name;
+				let theID = data[i].alias;
+				listMeat += '<li class="agency-name" id="agency-'+theID+'"><a href="#agency-'+theID+'" id="'+theID+'">'+agencyName+'</a><ul class="agency-docs"></ul></li>';
+				} //end loop1
+			}) //end .then
+		.then(function() { 
+			let agencyList= document.querySelector('#agency-list');
+			agencyList.innerHTML += listMeat+'</ul>';
+		}).then(function() { agencyDocuments(); } )
+	
+	
+} //end listOfCollections
+
+
+function agencyDocuments() {
+	console.log('AGENCY DOCUMENTSZ');
+	let indAgency = document.querySelectorAll('#collection-list li a');
+	for (i=0; i < indAgency.length; i++) { //begin loop2 to add document links
+	indAgency[i].addEventListener('click', function(event) {
+		let listResults = '';
+		let currentPage = 1;
+		let theID = event.target.id;
+		let count = 0;
+		let theContainer = document.querySelector('#agency-'+theID);
+		let theList = document.querySelector('#agency-'+theID+' .agency-docs');
+		if (theList.children.length <= count) { ; //#if1 check to make sure this list hasn't already been loaded
+			console.log('if! yes?');
+			count = count+50;
+			event.preventDefault();
+			getDocs()
+			.then(function(listResults) {
+			console.log('thenned');
+			theList.innerHTML = listResults;
+			location.hash = '#agency-'+theID;
+			theContainer.classList.remove('loading');
+			});//end .then
+		} //end if
+	}) 
+	}  //end loop2
+	
+	}; //end agencyDocuments 
+
+listOfCollections();
+
+function getDocs(event, currentPage, theID, count, listResults) { //##getDocs load and display doc list for each agency
+
+		
+		fetch('https://cdm16884.contentdm.oclc.org/digital/api/search/collection/'+theID+'/page/'+currentPage)
+		.then(function(response) { //.then1
+			return response.json();
+		  }) //end .then1
+		  .then (function(data) { //.then2
+			for (i = 0 ; i < data.items.length; i++) { //begin loop3
+			let regex = /\/singleitem/;
+			recURL = data.items[i].itemLink.split(regex)[1];
+			listResults += '<li><a href="/digital'+recURL+'">'+data.items[i].title+'</a></li>'
+			} //end loop3
+			if (data.totalResults > count) { //if2 add button to load more records
+				listResults += '<button id="'+theID+'-button" class="load-more">Load More Records</button>';
+								
+				} //end if2
+		 });
+		};
+//if already loaded, contents will display via CSS when targeted
+
+//end #AgencyList
+
+
+</script>
+<main id="homepage-main">
+	<div class="ContentHeader-maincontainer shared-box cdm-content-header"><p tabindex="0" class="ContentHeader-mainCopyHolder"><p> A service of the State Library of Kansas, Kansas Government Information (KGI) is a permanent online archive of state publications issued by Kansas state agencies, commissions and institutions.</p></p></div>
+	<section id="agency-list" class="shared-box loading">
+	<h1>Browse Collections by Agency</h1>
+	</section>
+	<section id="ask">
+	<iframe name="cwindow" src="https://us.libraryh3lp.com/chat/slkreference@chat.libraryh3lp.com?skin=18078&identity=Lib"></iframe>
+	</section>
+
+</main>
+
