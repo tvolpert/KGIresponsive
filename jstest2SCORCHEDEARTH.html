@@ -3,6 +3,7 @@
 	var allCollections = '<ul class="doc-list">';
 	var theCount;
 	var theDocs;
+	var runningTally;
 document.addEventListener('DOMContentLoaded', function() {
 	fetch('https://cdm16884.contentdm.oclc.org/digital/api/collections/all/simple')
 	.then(function(response) {
@@ -48,56 +49,43 @@ document.addEventListener('DOMContentLoaded', function() {
 	function getDocs(event) {
 		
 		let currentPage = 1;
-		let regexp = /#/
-		let theID= event.target.href.split(regexp)[1];
+		let theID= event.target.href.split(/#/)[1];
 		let resultDump = document.querySelector('#'+theID);
 		
-		if (resultDump.children.length == 0){
-	
-		event.preventDefault();
+		if (resultDump.children.length === 0){
+			event.preventDefault();
 			fetch('https://cdm16884.contentdm.oclc.org/digital/api/search/collection/'+theID+'/page/'+currentPage)
-			.then (function(response) {
+			.then(function(response) {
 				return response.json();
 			})
-			.then (function(data) {
-				return makeItemLinks(data);
-					
-			}) 
+			.then( function(data) {
+				console.log('page '+currentPage+': '+data);
+				theCount = data.totalResults
+				runningTally = 0;
+				theDocs = '';
+					do {
+						makeItemLinks(data);
+					} 
+					while (runningTally < theCount)
+			})
 			.then(function() {
 				resultDump.innerHTML += theDocs;
 			})
-			.then (function() { 
-				if (resultDump.children.length < theCount) {
-					currentPage++;
-					fetch('https://cdm16884.contentdm.oclc.org/digital/api/search/collection/'+theID+'/page/'+currentPage)
-					.then(function(response) {
-						return response.json();
-					})
-					.then( function(data) {
-						makeItemLinks(data);
-					})
-				}
-			
-			})
-			.finally( function() {
-				console.log ('all done!');
-				location.hash = event.target.hash;
-			})
+				
 		} //end if
-		else { console.log('you done something wrong somewhere' ) }
+		else { console.log('all good dogg' ) }
 	}; //end getDocs
 		
 	function makeItemLinks(data) {
-				console.log(data);
-				theDocs = '';
-				theCount = data.totalResults
+				
 				data.items.forEach(function(item) {
 					let regex = /\/singleitem/;
 					let recURL = item.itemLink.split(regex)[1];	
 					let theName = item.title;
 					theDocs += '<li><a href="'+recURL+'">'+theName+'</a></li>';
+					runningTally++
 						
-				});
+				}); //end forEach
 				
 	} //end makeItemLinks
 
