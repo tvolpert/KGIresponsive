@@ -85,17 +85,14 @@ section {
 --------------------------------------*/
 .agency-docs {
 	display: none;
-}
-
-.agency-name:target .agency-docs {
-	display: block;
-}
-
-.agency-name {
 	margin-top:-25px;
 	padding-top:25px;
+}
+
+.agency-docs:target, .agency-docs.open {
 	display: block;
 }
+
 .agency-name::before { /*change bullets to folders */
 	color: var(--SLKGold);
 	content:"\f07b";
