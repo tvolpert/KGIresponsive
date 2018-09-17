@@ -1,9 +1,72 @@
 /* 
-
 custom look and feel for KGI CONTENTdm site
+---------------------------------------------
+table of contents
+---------------------------------------------
 
+# 	variables for theming
+#	layout tweaks
+#	custom functionality
+	## list of publications
+	## individual record pages
 
 */
+
+/*---------------------------------------------
+   # variables for theming 
+-----------------------------------------------*/
+
+:root {
+	--SLKGold: #F5B11E;
+	--SLKDarkBlue: #192857;
+	--SLKMedBLue: #16629F;
+	--SLKLightBlue: #258ECD;
+	--SLKLightOrange: #E06547;
+	--SLKDarkOrange: #D83726;
+	--SLKDarkGray: #404041;
+	--SLKLightGray: #F1F1F2;
+	
+}
+
+/*---------------------------------------------
+   # layout tweaks
+-----------------------------------------------*/
+
+section {
+	margin: 10px;
+	padding: 10px;
+}
+
+#agency-list {
+	flex: 1 1 1200px;
+	order: -1;
+}
+
+#homepage-main {
+    display:  flex;
+    flex-flow: row wrap;
+}
+
+.ContentHeader-maincontainer {
+    flex: 01 100%;
+    order: -1;
+}
+
+#ask {
+    flex: 1 1 330px;
+    text-align: center;
+}
+
+#ask iframe {
+	min-height: 400px;
+	position: sticky;
+	top: 160px;
+}
+
+.Header-logoImage {
+	padding: 10px;
+}
+
 #maincontent .shared-box, iframe {
 	border: none;
 	flex: 2 1 40%;
@@ -12,11 +75,53 @@ custom look and feel for KGI CONTENTdm site
 	max-width: 42em;
 	min-height: 50em;
 }
-/* fold/unfold list of publications */
+
+
+/*---------------------------------------------
+  # custom functionality
+-----------------------------------------------*/
+
+/* 	## list of agency publications for homepage
+--------------------------------------*/
 .agency-docs {
 	display: none;
 }
 
-.agency-docs:target {
+.agency-name:target .agency-docs {
 	display: block;
+}
+
+.agency-name {
+	margin-top:-25px;
+	padding-top:25px;
+	display: block;
+}
+.agency-name::before { /*change bullets to folders */
+	color: var(--SLKGold);
+	content:"\f07b";
+	display:inline-block;
+	font-family: FontAwesome;
+	margin-left: -10px;
+	margin-right: 10px;
+}
+.agency-name:target::before {
+	content: "\f07c";
+}
+
+.agency-name.loading::before {
+    animation: fa-spin 2s infinite linear;
+    content: "\f110";
+}
+
+
+@media only screen and (min-width: 768px) {
+	.agency-name {
+		margin-top: -155px;
+		padding-top: 155px;
+	}
+}
+/*	## individual record pages
+---------------------------------------------*/
+.ItemView-itemSearchContainer.ItemSearch-itemSearchPrint {
+	display: none /*remove confusing search box */
 }
