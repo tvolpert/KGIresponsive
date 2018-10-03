@@ -1,4 +1,4 @@
-/* 
+/* v 2.9.2
 custom look and feel for KGI CONTENTdm site
 ---------------------------------------------
 table of contents
@@ -40,9 +40,10 @@ table of contents
 	/* flex: 1 1 1200px; */
 	/* order: -1; */
 }
-
+ 
 #homepage-main {
     display:  grid;
+    grid-gap: 10px;
     margin: auto;
     margin-bottom: 10px;
     max-width: 1300px;
@@ -55,6 +56,7 @@ table of contents
 
 #ask {
 	height: 400px;
+	text-align: center;
 }
 
 #ask iframe {
@@ -107,6 +109,7 @@ table of contents
 	content: "\f07b";
 	display:inline-block;
 	font-family: fontAwesome;
+	font-size: 1.2em;
 	padding-right: 20px;
 	margin-left: -20px;
 }
@@ -114,7 +117,12 @@ table of contents
 	content: "\f07c";
 } 
 
-
+.folder-nav {
+	opacity: .75;
+	position: sticky;
+	top: 0px;
+	text-align: right;
+}
 
 @media only screen and (min-width: 768px) {
 	#homepage-main {
@@ -144,9 +152,12 @@ table of contents
 	.agency-name{
 		width: max-content;
 	}
+	.folder-nav {
+		top:160px;
+	}
 }
 /*	## individual record pages
 ---------------------------------------------*/
-.ItemView-itemSearchContainer.ItemSearch-itemSearchPrint {
+.ItemView-itemSearchContainer.ItemSearch-itemSearchPrint, .ItemView-itemSearchContainer.ItemSearch-itemSearchPrint, .ItemView-bottomSingleItemBorder {
 	display: none /*remove confusing search box */
 }
