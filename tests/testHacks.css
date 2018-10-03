@@ -1,0 +1,26 @@
+	body {
+		background:  #ccc;
+		box-sizing: border-box;
+		margin:0;
+	}
+	header {
+		background-color: var(--SLKDarkBlue);
+		height: 125px;
+		top:0;
+		width: 100%;
+	}
+	html {
+		font-size: 1em;
+	}
+	
+	@media only screen and (min-width: 768px) {
+		header {
+			position: fixed;
+			height: 155px;
+			
+			} 
+	body {
+			padding-top:155px;
+		}
+	
+	}

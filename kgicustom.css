@@ -1,4 +1,4 @@
-/* 
+/* v 3.1.1
 custom look and feel for KGI CONTENTdm site
 ---------------------------------------------
 table of contents
@@ -32,47 +32,48 @@ table of contents
    # layout tweaks
 -----------------------------------------------*/
 
-section {
-	margin: 10px;
+.shared-box {
 	padding: 10px;
 }
 
 #agency-list {
-	flex: 1 1 1200px;
-	order: -1;
+	/* flex: 1 1 1200px; */
+	/* order: -1; */
 }
-
+ 
 #homepage-main {
-    display:  flex;
-    flex-flow: row wrap;
-}
+    display:  grid;
+    grid-gap: 10px;
+    margin: auto;
+    margin-bottom: 10px;
+    max-width: 1300px;
+    } 
 
 .ContentHeader-maincontainer {
-    flex: 01 100%;
-    order: -1;
+    /* flex: 01 100%; */
+    /* order: -1; */
 }
 
 #ask {
-    flex: 1 1 330px;
-    text-align: center;
+	height: 400px;
+	text-align: center;
 }
 
 #ask iframe {
-	min-height: 400px;
-	position: sticky;
-	top: 160px;
+	border: none;
+	height: 100%;
 }
 
 .Header-logoImage {
 	padding: 10px;
 }
 
-#maincontent .shared-box, iframe {
-	border: none;
-	flex: 2 1 40%;
-	padding: 5px;
-	margin: 0 0 10px 0;
-	max-width: 42em;
+#maincontent .shared-box {
+	/* border: none; */
+	/* flex: 2 1 40%; */
+	/* padding: 5px; */
+	/* margin: 0 0 10px 0; */
+	/* min-width: 100%; */
 	min-height: 50em;
 }
 
@@ -83,45 +84,86 @@ section {
 
 /* 	## list of agency publications for homepage
 --------------------------------------*/
+.agency-container {
+	margin-top:-22px;
+	padding-top:22px;
+}
+
+.agency-name, .agency-container {
+	display: block;
+
+}
+
 .agency-docs {
 	display: none;
+	
 }
 
-.agency-name:target .agency-docs {
+
+.agency-container:target .agency-docs, .agency-container.open .agency-docs {
 	display: block;
 }
 
-.agency-name {
-	margin-top:-25px;
-	padding-top:25px;
-	display: block;
-}
-.agency-name::before { /*change bullets to folders */
+.agency-container .agency-name::before { /*change bullets to folders */
 	color: var(--SLKGold);
-	content:"\f07b";
+	content: "\f07b";
 	display:inline-block;
-	font-family: FontAwesome;
-	margin-left: -10px;
-	margin-right: 10px;
+	font-family: fontAwesome;
+	font-size: 1.2em;
+	padding-right: 20px;
+	margin-left: -20px;
 }
-.agency-name:target::before {
+.agency-container:target .agency-name::before, .agency-container.open .agency-name::before {/*open folder when targeted*/
 	content: "\f07c";
-}
+} 
 
-.agency-name.loading::before {
-    animation: fa-spin 2s infinite linear;
-    content: "\f110";
+.folder-nav {
+	opacity: .75;
+	position: sticky;
+	top: 0px;
+	text-align: right;
 }
-
 
 @media only screen and (min-width: 768px) {
-	.agency-name {
-		margin-top: -155px;
-		padding-top: 155px;
+	#homepage-main {
+		grid: auto / 1fr 5fr;
+		grid-gap: 10px;
+	}
+	
+	#homepage-main .cdm-content-header {
+		/* grid-area: side1; */
+	}
+	#agency-list {
+		grid-row-end: span 3;
+	}
+	#ask {
+		border-radius: 4px;
+		box-shadow: 0px 2px 6px hsla(0, 0%, 0%, 0.58);
+		overflow: hidden;
+		position: sticky;
+		top: 160px;
+		width: max-content;
+	}
+	
+	.agency-container {
+		margin-top: -175px;
+		padding-top: 175px;
+	}
+	.agency-name{
+		width: max-content;
+	}
+	.folder-nav {
+		top:160px;
 	}
 }
 /*	## individual record pages
 ---------------------------------------------*/
-.ItemView-itemSearchContainer.ItemSearch-itemSearchPrint {
+.ItemView-itemSearchContainer.ItemSearch-itemSearchPrint, .ItemView-itemSearchContainer.ItemSearch-itemSearchPrint, .ItemView-bottomSingleItemBorder {
 	display: none /*remove confusing search box */
+}
+
+.g-drive-display {
+	border: none;
+    height: 275px;
+    width: 100%;
 }
