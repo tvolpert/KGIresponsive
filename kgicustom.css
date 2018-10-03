@@ -1,4 +1,4 @@
-/* v 2.9.2
+/* v 3.1.1
 custom look and feel for KGI CONTENTdm site
 ---------------------------------------------
 table of contents
@@ -160,4 +160,10 @@ table of contents
 ---------------------------------------------*/
 .ItemView-itemSearchContainer.ItemSearch-itemSearchPrint, .ItemView-itemSearchContainer.ItemSearch-itemSearchPrint, .ItemView-bottomSingleItemBorder {
 	display: none /*remove confusing search box */
+}
+
+.g-drive-display {
+	border: none;
+    height: 275px;
+    width: 100%;
 }
