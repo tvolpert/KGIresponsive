@@ -1,6 +1,6 @@
 
 (function(){
-	let currentVersh = 'kgiscript v3.1.1';
+	let currentVersh = 'kgiscript v3.1.5';
 	console.log(currentVersh);
 /*--------------- All Pages -------------------------------------------------*/
 
@@ -43,7 +43,17 @@ function fauxAPI(url){ //ersatz document handling interface for html/php files
 }
 	
 /*------------ Home Page -----------------------------------------------------------*/
-	function expandAll() {
+    document.addEventListener('cdm-custom-page:ready', function() { //for custom home page folders
+    //enable expand and collapse buttons for folders
+    document.querySelector('#expandAll').addEventListener('click', expandAll);
+    document.querySelector('#collapseAll').addEventListener('click', collapseAll);
+    let agencyNames = document.querySelectorAll('.agency-name');
+    agencyNames.forEach((item)=> {
+            item.addEventListener('click', (event) => {click2OpensCollection(event)} )
+        })
+	}); //end custom-page event
+    
+    function expandAll() {
 		let docLists = document.querySelectorAll('.agency-container');
 		docLists.forEach(function(item) {
 			item.classList.add('open');
@@ -58,12 +68,19 @@ function fauxAPI(url){ //ersatz document handling interface for html/php files
 			}
 		})
 	}
-	document.addEventListener('cdm-custom-page:ready', function() { //for custom home page folders
-		document.querySelector('#expandAll').addEventListener('click', expandAll);
-		document.querySelector('#collapseAll').addEventListener('click', collapseAll);
-	}); //end custom-page event
 
-
+    function click2OpensCollection(e) { 	
+    //make the second click on an agency name go to the agency page
+        let theLink = e.currentTarget.href;
+        let hash = window.location.hash;
+        let collID = window.location.hash.replace('#', '');
+        if ( window.location.hash!= '' && theLink.includes(hash) ) {
+            e.preventDefault();
+            window.location = 'collection/'+collID
+        }
+    }
+	
+	
 /*------------- Item pages -------------------------------------------------------*/	
 
 	document.addEventListener('cdm-item-page:ready', function() {
@@ -83,7 +100,10 @@ function fauxAPI(url){ //ersatz document handling interface for html/php files
 				let frame= '<iframe class="g-drive-display" src="'+val+'"></iframe>'
 				return itemPreview.innerHTML= frame
 			})
-		}
+		} else if (theLink.href.match('embeddedfolderview')){
+            let frame= '<iframe class="g-drive-display" src="'+theLink.href+'"></iframe>'
+			itemPreview.innerHTML= frame
+        } 
 	
 	}); //end item-page event listener
 	
@@ -93,11 +113,11 @@ function fauxAPI(url){ //ersatz document handling interface for html/php files
 		
 		//grab formatted list of agency pubs from static file
 		let theID = e.detail.collectionId; //grab collection id from the current page
-		let targetContainer = document.querySelector('.CollectionLanding-maincontainer');
-		fauxAPI('https://cdm16884.contentdm.oclc.org/customizations/global/pages/agencylist.html')
+		let targetContainer = document.querySelector('.CollectionLanding-maincontentLanding');
+		fauxAPI('/customizations/global/pages/agencylist.html')
 		.then((html) => {
-			return html.querySelector('#'+theID).innerHTML
-		}).then((value) => targetContainer.innerHTML += value );
+			return html.querySelector('#'+theID+' .agency-docs').innerHTML;
+		}).then((value) => { targetContainer.insertAdjacentHTML('beforeend','<div class="publications"><h1>Agency Publications in KGI</h1>'+value+'</div>') });
 		
 		
 	}); //end collection landing page event	

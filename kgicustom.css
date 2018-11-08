@@ -1,4 +1,4 @@
-/* v 3.1.1
+/* v 3.1.3
 custom look and feel for KGI CONTENTdm site
 ---------------------------------------------
 table of contents
@@ -6,6 +6,7 @@ table of contents
 
 # 	variables for theming
 #	layout tweaks
+	## Collection landing pages
 #	custom functionality
 	## list of publications
 	## individual record pages
@@ -36,11 +37,6 @@ table of contents
 	padding: 10px;
 }
 
-#agency-list {
-	/* flex: 1 1 1200px; */
-	/* order: -1; */
-}
- 
 #homepage-main {
     display:  grid;
     grid-gap: 10px;
@@ -48,11 +44,6 @@ table of contents
     margin-bottom: 10px;
     max-width: 1300px;
     } 
-
-.ContentHeader-maincontainer {
-    /* flex: 01 100%; */
-    /* order: -1; */
-}
 
 #ask {
 	height: 400px;
@@ -68,14 +59,11 @@ table of contents
 	padding: 10px;
 }
 
-#maincontent .shared-box {
-	/* border: none; */
-	/* flex: 2 1 40%; */
-	/* padding: 5px; */
-	/* margin: 0 0 10px 0; */
-	/* min-width: 100%; */
-	min-height: 50em;
-}
+
+
+/*---------------------------------------------
+  ## collection landing pages
+-----------------------------------------------*/
 
 
 /*---------------------------------------------
@@ -94,7 +82,7 @@ table of contents
 
 }
 
-.agency-docs {
+.agency-container .agency-docs {
 	display: none;
 	
 }
