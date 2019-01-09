@@ -1,10 +1,10 @@
-/* v 3.1.3
+/* v 4.1.4
+
 custom look and feel for KGI CONTENTdm site
 ---------------------------------------------
 table of contents
 ---------------------------------------------
 
-# 	variables for theming
 #	layout tweaks
 	## Collection landing pages
 #	custom functionality
@@ -13,21 +13,6 @@ table of contents
 
 */
 
-/*---------------------------------------------
-   # variables for theming 
------------------------------------------------*/
-
-:root {
-	--SLKGold: #F5B11E;
-	--SLKDarkBlue: #192857;
-	--SLKMedBLue: #16629F;
-	--SLKLightBlue: #258ECD;
-	--SLKLightOrange: #E06547;
-	--SLKDarkOrange: #D83726;
-	--SLKDarkGray: #404041;
-	--SLKLightGray: #F1F1F2;
-	
-}
 
 /*---------------------------------------------
    # layout tweaks
@@ -38,28 +23,36 @@ table of contents
 }
 
 #homepage-main {
-    display:  grid;
-    grid-gap: 10px;
     margin: auto;
     margin-bottom: 10px;
-    max-width: 1300px;
+
     } 
 
 #ask {
+    border-radius: 4px;
 	height: 400px;
+    overflow: hidden;
 	text-align: center;
 }
 
 #ask iframe {
 	border: none;
 	height: 100%;
+    width:100%;
 }
 
 .Header-logoImage {
 	padding: 10px;
 }
 
+#homepage-main section {
+	margin: 10px
+}
 
+*:target {
+    margin-top:-150px;
+    padding-top:150px;
+}
 
 /*---------------------------------------------
   ## collection landing pages
@@ -70,16 +63,17 @@ table of contents
   # custom functionality
 -----------------------------------------------*/
 
-/* 	## list of agency publications for homepage
+/* 	## list of agency publications for home/historical pages
 --------------------------------------*/
 .agency-container {
-	margin-top:-22px;
-	padding-top:22px;
+
 }
 
 .agency-name, .agency-container {
 	display: block;
-
+}
+.agency-name {
+    cursor: pointer;
 }
 
 .agency-container .agency-docs {
@@ -88,12 +82,12 @@ table of contents
 }
 
 
-.agency-container:target .agency-docs, .agency-container.open .agency-docs {
+.agency-container:target > .agency-docs, .agency-container.open > .agency-docs {
 	display: block;
 }
 
 .agency-container .agency-name::before { /*change bullets to folders */
-	color: var(--SLKGold);
+	color: #F5B11E;
 	content: "\f07b";
 	display:inline-block;
 	font-family: fontAwesome;
@@ -101,7 +95,7 @@ table of contents
 	padding-right: 20px;
 	margin-left: -20px;
 }
-.agency-container:target .agency-name::before, .agency-container.open .agency-name::before {/*open folder when targeted*/
+.agency-container:target > .agency-name::before, .agency-container.open > .agency-name::before {/*open folder when targeted*/
 	content: "\f07c";
 } 
 
@@ -114,35 +108,74 @@ table of contents
 
 @media only screen and (min-width: 768px) {
 	#homepage-main {
-		grid: auto / 1fr 5fr;
-		grid-gap: 10px;
-	}
-	
-	#homepage-main .cdm-content-header {
-		/* grid-area: side1; */
-	}
-	#agency-list {
-		grid-row-end: span 3;
-	}
+        display: -ms-grid;
+        display: grid;
+        grid-auto-flow: dense;
+        -ms-grid-columns: 2fr 5fr 5fr;
+        grid-template-columns: 1fr 3fr 3fr;
+ }
+
+	   
+	.agency-list {
+        -ms-grid-row-span: 5;
+        grid-row-end: span 5;
+        
+ }
+ 
+ #home-header{
+     -ms-grid-row:1;
+ }
+ #modern {
+     -ms-grid-column: 2;
+     
+ }
+ #hist {
+     -ms-grid-column: 3;
+     
+ }
+ #imls{
+     -ms-grid-row:2;
+     
+ }
+ #kshs {
+     -ms-grid-row:3;
+     
+ }
 	#ask {
 		border-radius: 4px;
-		box-shadow: 0px 2px 6px hsla(0, 0%, 0%, 0.58);
+        -ms-grid-row: 4;
 		overflow: hidden;
-		position: sticky;
+        position: sticky;
 		top: 160px;
-		width: max-content;
+        left:0;
+       
 	}
 	
 	.agency-container {
-		margin-top: -175px;
-		padding-top: 175px;
+	
 	}
 	.agency-name{
-		width: max-content;
+		
 	}
 	.folder-nav {
 		top:160px;
 	}
+	.logo img {
+		display: inline-block;
+		max-width:300px;
+	}
+	.logo p {
+		display: inline-block;
+		flex: 0 1 400px;
+
+	}
+	.logo {
+		display:flex;
+		flex-flow: row wrap;
+		align-items: center;
+		justify-content: space-evenly;
+	}
+
 }
 /*	## individual record pages
 ---------------------------------------------*/
