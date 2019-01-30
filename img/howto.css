@@ -1,0 +1,86 @@
+* {
+    font-family: sans-serif;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+body{
+    background-color: hsl(200, 6%, 68%);
+    margin:0;
+}
+
+main {
+
+}
+
+header {
+    text-align: center;
+}
+.example {
+    cursor: pointer;
+    width: 200px;
+    /* border-radius: 25px; */
+    box-shadow: -1px 1px 5px #1a1a1a;
+}
+
+.modal {
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.61);
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    margin: 0;
+    position: absolute;
+    padding: 50px;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+}
+.modal > img {
+    max-width:  100%;
+    max-height: 100%;
+}
+
+.step {
+    background-color: white;
+    box-shadow: -2px 1px 10px 2px rgba(39, 33, 33, 0.31);
+    display: block;
+    left: 25vw;
+    margin: auto;
+    height: 800px;
+    width: 720px;
+    position: absolute;
+    padding:  20px;
+    top: 100px;
+}
+
+#stepOne {
+    z-index: 2;
+}
+
+
+.step:target {
+    animation-name: woosh;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    z-index:3
+}
+
+@keyframes woosh {
+    0% {top:50px;z-index:0;}
+    10% {top: 25px;}
+    20% {left: 25vw;}
+    55% {z-index:0;}
+    60% {left: calc(25vw + 750px);z-index:3;}
+    99% {left:25vw;}
+    100% {top:130px; }
+    
+}
+
+.sm {
+
+}
+
+.arrow {
+    font-size: 10rem;
+}

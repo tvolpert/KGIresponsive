@@ -1,4 +1,5 @@
 'use strict';
+var currentVersion = '4.1.18';
 /*contents 
     #shims etc
     #All Pages
@@ -7,7 +8,6 @@
     #Collection Pages
 */
 /* To Do:
-
 */
 /*----------#shims etc------------------*
 
@@ -26,8 +26,8 @@ if (window.NodeList && !NodeList.prototype.forEach) { //make NodeList available 
 	};
 }
 (function () {
-	var currentVersh = 'kgiscript v4.1.1';
-	console.log(currentVersh);
+	
+	console.log('KGIscript v '+currentVersion);
 	/*--------------- All Pages -------------------------------------------------*/
 
 	function changeLogoLink() {
@@ -128,6 +128,7 @@ if (window.NodeList && !NodeList.prototype.forEach) { //make NodeList available 
 	/*------------- #Item pages -------------------------------------------------------*/
 
 	document.addEventListener('cdm-item-page:ready', function () {
+        console.log('ready event fired');
 		// extract broken html from metadata fields, reinsert to fix formatting 
 		var metaData = document.querySelectorAll('.ItemMetadata-metadatarow td span');
 		metaData.forEach(function (item) {
@@ -137,7 +138,7 @@ if (window.NodeList && !NodeList.prototype.forEach) { //make NodeList available 
 		//embed G Page content for custom records on item record page
 		var itemPreview = document.querySelector('.ItemPreview-container .preview');
 		var theLink = document.querySelector('.ItemUrl-itemUrlLink a');
-		if (theLink.href.match('G_Pages')) { //if the record has an old-model php page set up, crawl that page and replace link with iframe
+		if (theLink && theLink.href.match('G_Pages')) { //if the record has an old-model php page set up, crawl that page and replace link with iframe
 			fauxAPI(theLink.href).then(function (html) {
 				return html.querySelector('iframe').src;
 			}).then(function (val) {
@@ -145,11 +146,22 @@ if (window.NodeList && !NodeList.prototype.forEach) { //make NodeList available 
 				var frame = '<iframe class="g-drive-display" src="' + val + '"></iframe>';
 				return itemPreview.innerHTML = frame;
 			});
-		} else if (theLink.href.match('embeddedfolderview')) { //if record links directly to Google Drive, replace link with iframe
+		} else if (theLink && theLink.href.match('embeddedfolderview')) { //if record links directly to Google Drive, replace link with iframe
 			var frame = '<iframe class="g-drive-display" src="' + theLink.href + '"></iframe>';
 			itemPreview.innerHTML = frame;
 		}
-	}); //end item-page event listener
+        var img = document.querySelector('.ItemPDF-itemImage img');
+        img.onload = fullPageExpandButton;
+        function fullPageExpandButton(){
+            console.log('expand deployed');
+            var button = document.querySelector('.ItemPDF-itemImage button'),
+                expander = button.querySelector('.fa');
+
+            button.setAttribute('style', 'width:'+img.width+'px;height:'+img.height+'px;top:0;left:0;background-color:unset;');
+            expander.classList.add('ItemPDF-expandButton','btn','btn-primary');
+        }
+    }); //end item-page event listener
+    
 
 	/*-------------- #Collection Pages ------------------------------------------------------*/
 

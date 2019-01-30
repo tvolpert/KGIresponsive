@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<title>How to update the KGI homepage</title>
+<link rel=stylesheet href="img/howto.css">
+<script src="img/howto.js"></script>
+</head>
+<body>
+<main><header>
+
+	    <h1>how to edit the KGI homepage</h1>
+
+	    <p><em>if you must</em></p>
+
+	</header>
+
+	<ol id=instructions class="lvl1">
+
+	    <li id=stepOne class=step>
+
+	        Open your file explorer and navigate to <code>S:\ContentDM\ResponsiveSiteFiles\KGIresponsive</code>
+
+	            <ol class="lvl2">
+                    <li>right-click on <code>home.html</code> and choose Edit with Notepad++</li>
+                    <li>you should see something like this (fonts and colors will vary):</li><img id=nppp class="example" src="img/np++.png">
+                    <li>make the necessary changes</li>
+                    <li>add one(1) to the version number at the very top of the file:</li><img class="example sm" src="img/versioning.gif">
+                    <li>save!</li>
+                    <li>leave the file explorer open</li>
+	            </ol>
+                <a href="#stepTwo" title="next step">next step</a>
+
+	    </li>
+
+	    <li id=stepTwo class=step>
+	        Open your web browser and navigate to <code><a href="https://cdm16884.contentdm.oclc.org/login/configtool">the ContentDM website configuration tool</a></code>
+                <ol class=lvl2>
+                    <li>log in</li>
+                    <li>change the tealish-colored box at the top of the page to say <code>Responsive</code> instead of <code>6.x Website</code></li><img class=example src="img/tealish.png">
+                    <li>on the left-hand side of the page, click <code>Page Types</code> and then <code>Home Page</code></li>
+                    <li>scroll to the bottom of the page</li>
+                    <li>next to the field for <code>Custom html</code>, click the <code>browse</code> button</li><img class=example src="img/browse.png">
+                    <li>the file upload window should come up:</li><img class=example src="img/upload.png">
+                    <li>drag <code>home.html</code> over from the file explorer</li><img class=example src="img/drag.png">
+                    <li>it will automatically replace the previous version</li>
+                    <li>all done!</li>
+                </ol>
+                <a href="#stepOne" title="previous step">previous step</a>
+
+	    </li>
+
+	</ol>
+
+	</main>
+
+</body>
+</html>
