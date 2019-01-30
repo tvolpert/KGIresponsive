@@ -1,5 +1,5 @@
 'use strict';
-var currentVersion = '4.1.18';
+var currentVersion = '4.2.0';
 /*contents 
     #shims etc
     #All Pages
@@ -86,11 +86,11 @@ if (window.NodeList && !NodeList.prototype.forEach) { //make NodeList available 
 		}); */
         
     function openFolder(e) {
-        let targ = e.target.parentNode;
+        var targ = e.target.parentNode;
        targ.classList.toggle('open');
         
     }
-	let items = document.querySelectorAll('.agency-name');
+	var items = document.querySelectorAll('.agency-name');
     items.forEach(function(item) {
         item.addEventListener('click', function(event) {
             openFolder(event)
@@ -101,14 +101,14 @@ if (window.NodeList && !NodeList.prototype.forEach) { //make NodeList available 
     }); //end custom-page event
 
 	function expandAll(e) {
-		let thisBox = e.srcElement.parentNode;
+		var thisBox = e.srcElement.parentNode;
         thisBox.querySelectorAll('.agency-container').forEach(function (item) {
 			item.classList.add('open');
 		});
 	};
     
     function collapseAll(e) {
-		let thisBox = e.srcElement.parentNode;
+		var thisBox = e.srcElement.parentNode;
         thisBox.querySelectorAll('.agency-container').forEach(function (item) {
 			item.classList.remove('open');
 		});
