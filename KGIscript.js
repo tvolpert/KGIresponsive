@@ -1,14 +1,13 @@
 'use strict';
-var currentVersion = '4.2.0';
+var currentVersion = '4.4.31';
 /*contents 
     #shims etc
     #All Pages
-    #Custom Pages
+    #Home Page
     #Item Pages
     #Collection Pages
 */
-/* To Do:
-*/
+
 /*----------#shims etc------------------*
 
 /**
@@ -17,7 +16,7 @@ var currentVersion = '4.2.0';
  */
 
     
-if (window.NodeList && !NodeList.prototype.forEach) { //make NodeList available in browsers that don't support it ( i think)
+if (window.NodeList && !NodeList.prototype.forEach) { //make NodeList available in browsers that don't support it 
 	NodeList.prototype.forEach = function (callback, thisArg) {
 		thisArg = thisArg || window;
 		for (var i = 0; i < this.length; i++) {
@@ -25,9 +24,9 @@ if (window.NodeList && !NodeList.prototype.forEach) { //make NodeList available 
 		}
 	};
 }
-(function () {
+(function () { //begin namespace
 	
-	console.log('KGIscript v '+currentVersion);
+	console.log('KGIscript v '+currentVersion); 
 	/*--------------- All Pages -------------------------------------------------*/
 
 	function changeLogoLink() {
@@ -68,8 +67,8 @@ if (window.NodeList && !NodeList.prototype.forEach) { //make NodeList available 
 		});
 	}
 
-	/*------------ #Custom Pages -----------------------------------------------------------*/
-	document.addEventListener('cdm-custom-page:ready', function () {
+	/*------------ #Home Page-----------------------------------------------------------*/
+	document.addEventListener('cdm-home-page:ready', function () {
 		//for custom home page folders
 		//enable expand and collapse buttons for folders
 		document.querySelectorAll('.expandAll').forEach(function(item){
@@ -79,26 +78,22 @@ if (window.NodeList && !NodeList.prototype.forEach) { //make NodeList available 
             item.addEventListener('click', collapseAll);
         });
 		var agencyNames = document.querySelectorAll('.agency-name a');
-		/* probably delete this?  agencyNames.forEach(function (item) {
-			item.addEventListener('click', function (event) {
-				click2OpensCollection(event);
-			});
-		}); */
+	
         
-    function openFolder(e) {
-        var targ = e.target.parentNode;
-       targ.classList.toggle('open');
-        
-    }
-	var items = document.querySelectorAll('.agency-name');
-    items.forEach(function(item) {
-        item.addEventListener('click', function(event) {
-            openFolder(event)
+        function openFolder(e) {
+            var targ = e.target.parentNode;
+           targ.classList.toggle('open');
+            
+        }
+        var items = document.querySelectorAll('.agency-name');
+        items.forEach(function(item) {
+            item.addEventListener('click', function(event) {
+                openFolder(event)
+                });
             });
-        });
 
 
-    }); //end custom-page event
+    }); //end home-page event
 
 	function expandAll(e) {
 		var thisBox = e.srcElement.parentNode;
@@ -114,54 +109,96 @@ if (window.NodeList && !NodeList.prototype.forEach) { //make NodeList available 
 		});
 	}
 
-	/* function click2OpensCollection(e) {
-		//make the second click on an agency name go to the agency page
-		var theLink = e.currentTarget.href;
-		var hash = window.location.hash;
-		var collID = window.location.hash.replace('#', '');
-		if (window.location.hash != '' && theLink.includes(hash)) {
-			e.preventDefault();
-			window.location = 'collection/' + collID;
-		}
-	} */
-
 	/*------------- #Item pages -------------------------------------------------------*/
 
-	document.addEventListener('cdm-item-page:ready', function () {
-        console.log('ready event fired');
-		// extract broken html from metadata fields, reinsert to fix formatting 
-		var metaData = document.querySelectorAll('.ItemMetadata-metadatarow td span');
-		metaData.forEach(function (item) {
-			var text = item.textContent;item.innerHTML = text;
-		});
-
-		//embed G Page content for custom records on item record page
+	document.addEventListener('cdm-item-page:ready', itemPage); //end item-page event listener
+    document.addEventListener('cdm-item-page:update', itemPage);
+	
+    
+    function itemPage() {
+		
+        gPageEmbed();
+		setTimeout(metaCleanUp, 1000); //kludged with a timer to get around react events that fire after cdm-item-page:ready 
+		expandButtonExpand();
+		
+	} //end itemPage() 
+	
+	function gPageEmbed() {
+			//embed G Page content for custom records on item record page
 		var itemPreview = document.querySelector('.ItemPreview-container .preview');
 		var theLink = document.querySelector('.ItemUrl-itemUrlLink a');
 		if (theLink && theLink.href.match('G_Pages')) { //if the record has an old-model php page set up, crawl that page and replace link with iframe
+			
+			console.log('Old-model G Page');
+			
 			fauxAPI(theLink.href).then(function (html) {
 				return html.querySelector('iframe').src;
 			}).then(function (val) {
 
-				var frame = '<iframe class="g-drive-display" src="' + val + '"></iframe>';
-				return itemPreview.innerHTML = frame;
+				var theFrame = '<iframe class="g-drive-display" src="' + val + '"></iframe>';
+				return itemPreview.innerHTML = theFrame;
 			});
+			
 		} else if (theLink && theLink.href.match('embeddedfolderview')) { //if record links directly to Google Drive, replace link with iframe
-			var frame = '<iframe class="g-drive-display" src="' + theLink.href + '"></iframe>';
-			itemPreview.innerHTML = frame;
+			
+			console.log('Newer Model G Page');
+			
+			var theFrame = '<iframe class="g-drive-display" src="' + theLink.href + '"></iframe>';
+			itemPreview.innerHTML = theFrame;
 		}
-        var img = document.querySelector('.ItemPDF-itemImage img');
-        img.onload = fullPageExpandButton;
-        function fullPageExpandButton(){
-            console.log('expand deployed');
-            var button = document.querySelector('.ItemPDF-itemImage button'),
-                expander = button.querySelector('.fa');
-
-            button.setAttribute('style', 'width:'+img.width+'px;height:'+img.height+'px;top:0;left:0;background-color:unset;');
-            expander.classList.add('ItemPDF-expandButton','btn','btn-primary');
-        }
-    }); //end item-page event listener
+        
     
+		
+	} //end gPageEmbed
+	
+	function metaCleanUp() { 
+		
+		
+		
+		var fieldValues = document.querySelectorAll('td.field-value > span'); //find all field values, return a NodeList of top-level spans
+		
+		fieldValues.forEach(function(theValue) { //loop of loops
+			if (theValue.childElementCount > 0) { //if 1 -- now we need to determine if the span in question has any highlights - ie spans inside it
+				var eachSpan = theValue.children;
+				for (var i = 0; i < eachSpan.length; i++) { //for loop 1.1 -- if we have highlights, only change within them
+						var theText = eachSpan[i].textContent
+						if ( theText.match('<br>') ) { //if 1.1 --only fix the broken ones
+							
+							eachSpan[i].innerHTML = theText;
+						}
+					} //end for loop 1.1
+			
+				
+			} //end if 1
+			else { //else1 -- no highlights, cleanup the values in place 
+				var theText = theValue.textContent;
+				if ( theText.match('<br>') ) { // if 1.2 --only fix the broken ones again
+					theValue.innerHTML = theText;
+					
+				} //end if 1.2
+				
+			} //end else1
+				
+				
+		}); //end loop of loops
+
+		
+	} //end metaCleanUp
+	
+	function expandButtonExpand() {
+		
+		
+		var theButton = document.querySelector('.ItemPDF-itemImage button');
+			if (theButton) { 
+				var expander = theButton.querySelector('.fa');
+
+				theButton.classList = "expanderButton";
+				expander.classList.add('ItemPDF-expandButton', 'cdm-btn','btn','btn-primary');
+			} 
+		
+	} //end expandButtonExpand
+
+ 
 
 	/*-------------- #Collection Pages ------------------------------------------------------*/
 
