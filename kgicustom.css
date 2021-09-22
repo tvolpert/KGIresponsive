@@ -1,4 +1,4 @@
-/* v 4.1.4
+/* v 4.1.7
 
 custom look and feel for KGI CONTENTdm site
 ---------------------------------------------
@@ -54,6 +54,26 @@ table of contents
     padding-top:150px;
 }
 
+.logo img {
+		width: 30%
+	}
+	.logo p {
+		
+		flex: 2 1 60%;
+
+		
+
+		padding: 1em;
+	}
+	.logo {
+		display:flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-around;
+		flex-wrap: wrap;
+		align-content: space-between;
+	}
+
 /*---------------------------------------------
   ## collection landing pages
 -----------------------------------------------*/
@@ -106,13 +126,13 @@ table of contents
 	text-align: right;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1000px) {
 	#homepage-main {
         display: -ms-grid;
         display: grid;
         grid-auto-flow: dense;
-        -ms-grid-columns: 2fr 5fr 5fr;
-        grid-template-columns: 1fr 3fr 3fr;
+        -ms-grid-columns: 3fr 5fr 5fr;
+        grid-template-columns: 3fr 5fr 5fr;
  }
 
 	   
@@ -151,6 +171,11 @@ table of contents
        
 	}
 	
+	
+
+	.logo img {
+		width: 70%;
+	}
 	.agency-container {
 	
 	}
@@ -160,23 +185,11 @@ table of contents
 	.folder-nav {
 		top:160px;
 	}
-	.logo img {
-		display: inline-block;
-		max-width:300px;
-	}
-	.logo p {
-		display: inline-block;
-		flex: 0 1 400px;
+	
 
-	}
-	.logo {
-		display:flex;
-		flex-flow: row wrap;
-		align-items: center;
-		justify-content: space-evenly;
-	}
+} /*end media query */
 
-}
+
 /*	## individual record pages
 ---------------------------------------------*/
 .ItemView-itemSearchContainer.ItemSearch-itemSearchPrint, .ItemView-itemSearchContainer.ItemSearch-itemSearchPrint, .ItemView-bottomSingleItemBorder {
@@ -187,4 +200,16 @@ table of contents
 	border: none;
     height: 275px;
     width: 100%;
+}
+
+button.expanderButton {
+	height: 100%;
+	left: 0;
+	Position: absolute;
+	top: 0;width: 100%;
+	
+}
+
+.fa.cdm-btn {
+	font-family: FontAwesome;
 }
