@@ -1,5 +1,5 @@
 'use strict';
-var currentVersion = '4.4.31';
+var currentVersion = '4.4.4';
 /*contents 
     #shims etc
     #All Pages
@@ -32,7 +32,7 @@ if (window.NodeList && !NodeList.prototype.forEach) { //make NodeList available 
 	function changeLogoLink() {
 		//make logo redirect to Library Home Page
 		var headerLogo = document.querySelector('div.Header-logoHolder>div>a');
-		var newUrl = 'https://kslib.info';
+		var newUrl = 'https://library.ks.gov';
 		headerLogo.href = newUrl;
 		headerLogo.title = 'click to return to the State Library of Kansas';
 		headerLogo.addEventListener('click', function (e) {
